@@ -11,7 +11,10 @@ import shapes as shapes_pkg
 from shapes import point_generator
 from config import *
 
-DEBUGGING = True
+
+sys.setrecursionlimit(5500)
+
+DEBUGGING = False
 SVG = set(['rect', 'circle', 'ellipse', 'line', 'polyline', 'polygon', 'path'])
 
 
