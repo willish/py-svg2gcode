@@ -80,8 +80,7 @@ def generate_gcode(filename):
     # ASSUMES: Y ASIX IS LONG AXIS
     #          X AXIS IS SHORT AXIS
     # i.e. laser cutter is in "portrait"
-    scale_x = bed_max_x / float(width)
-    scale_y = bed_max_y / float(height)
+
     scale = 1
 
 
