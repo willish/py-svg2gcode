@@ -10,10 +10,10 @@
 
 
 '''G-code emitted at the start of processing the SVG file'''
-preamble = "G17\nG90\nG0 Z10\nG0 X0 Y0\nM3\n"
+preamble = "G17\nG90\nG0 Z10\nG0 X0 Y0\nM3 S100\n"
 
 '''G-code emitted at the end of processing the SVG file'''
-postamble = "G0 Z10\nM5\nM2"
+postamble = "G0 Z10\nM3 S100\nM2"
 
 '''G-code emitted before processing a SVG shape'''
 shape_preamble = ""#G4 P0.2"
