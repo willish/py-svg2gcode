@@ -84,12 +84,6 @@ def generate_gcode(filename):
     scale = 1
 
 
-    log += debug_log("wdth: "+str(width))
-    log += debug_log("hght: "+str(height))
-    log += debug_log("scale: "+str(scale))
-    log += debug_log("x%: "+str(scale_x))
-    log += debug_log("y%: "+str(scale_y))
-
     # CREATE OUTPUT VARIABLE
     gcode = ""
 
