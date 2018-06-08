@@ -14,7 +14,7 @@ from config import *
 
 sys.setrecursionlimit(5500)
 
-DEBUGGING = False
+DEBUGGING = True
 SVG = set(['rect', 'circle', 'ellipse', 'line', 'polyline', 'polygon', 'path'])
 
 
