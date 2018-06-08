@@ -3,18 +3,23 @@
     Author: Peter Scriven
 '''
 
+    # begin = "G17;G90;G0 Z10;G0 X0 Y0;M3;G4 P2000.000000"
+    # end = "G0 Z10;M5;M2" 
+    # toolon =  "M3"
+    # tooloff = "M5"
+
 
 '''G-code emitted at the start of processing the SVG file'''
-preamble = "G28\nG1 Z0.0\nM05"
+preamble = "G17\nG90\nG0 Z10\nG0 X0 Y0\nM3\n"
 
 '''G-code emitted at the end of processing the SVG file'''
-postamble = "G28"
+postamble = "G0 Z10\nM5\nM2"
 
 '''G-code emitted before processing a SVG shape'''
-shape_preamble = "G4 P0.2"
+shape_preamble = ""#G4 P0.2"
 
 '''G-code emitted after processing a SVG shape'''
-shape_postamble = "G4 P0.2\nM05"
+shape_postamble = "M5"#"G4 P0.2\nM05"
 
 # A4 area:               210mm x 297mm
 # Printer Cutting Area: ~178mm x ~344mm

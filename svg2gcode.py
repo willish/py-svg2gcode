@@ -14,7 +14,7 @@ from config import *
 
 sys.setrecursionlimit(5500)
 
-DEBUGGING = True
+DEBUGGING = False
 SVG = set(['rect', 'circle', 'ellipse', 'line', 'polyline', 'polygon', 'path'])
 
 
@@ -41,18 +41,10 @@ def generate_gcode(filename):
         dir_string += folder + '/'
 
     # Make Output File
-    outdir = dir_string + "gcode_output/"
-    if not os.path.exists(outdir):
-        os.makedirs(outdir)
-    outfile = outdir + file.split(".svg")[0] + '.gcode'
+    outfile = "/tmp/output.gcode"
     log += debug_log("Output File: "+outfile)
 
     # Make Debug File
-    debugdir = dir_string + "log/"
-    if not os.path.exists(debugdir):
-        os.makedirs(debugdir)
-    debug_file = debugdir + file.split(".svg")[0] + '.log'
-    log += debug_log("Log File: "+debug_file+"\n")
 
     # Get the SVG Input File
     file = open(filename, 'r')
@@ -73,6 +65,16 @@ def generate_gcode(filename):
         print "Unable to get width and height for the svg"
         sys.exit(1)
     
+
+
+
+    # begin = "G17;G90;G0 Z10;G0 X0 Y0;M3;G4 P2000.000000"
+    # end = "G0 Z10;M5;M2" 
+    # toolon =  "M3"
+    # tooloff = "M5"
+
+
+
     # Scale the file appropriately
     # (Will never distort image - always scales evenly)
     # ASSUMES: Y ASIX IS LONG AXIS
@@ -80,9 +82,7 @@ def generate_gcode(filename):
     # i.e. laser cutter is in "portrait"
     scale_x = bed_max_x / float(width)
     scale_y = bed_max_y / float(height)
-    scale = min(scale_x, scale_y)
-    if scale > 1:
-        scale = 1
+    scale = 1
 
 
     log += debug_log("wdth: "+str(width))
@@ -153,16 +153,15 @@ def generate_gcode(filename):
 
                     log += debug_log("\t  pt: "+str((x,y)))
 
-                    if x >= 0 and x <= bed_max_x and y >= 0 and y <= bed_max_y:
-                        if new_shape:
-                            gcode += ("G0 X%0.1f Y%0.1f\n" % (x, y))
-                            gcode += "M03\n"
-                            new_shape = False
-                        else:
-                            gcode += ("G0 X%0.1f Y%0.1f\n" % (x, y))
-                        log += debug_log("\t    --Point printed")
+
+                    if new_shape:
+                        gcode += ("G0 X%0.1f Y%0.1f\n" % (x, y))
+                        gcode += "M3\n"
+                        new_shape = False
                     else:
-                        log += debug_log("\t    --POINT NOT PRINTED ("+str(bed_max_x)+","+str(bed_max_y)+")")
+                        gcode += ("G0 X%0.1f Y%0.1f\n" % (x, y))
+                    log += debug_log("\t    --Point printed")
+
                 gcode += shape_postamble + "\n"
             else:
               log += debug_log("\tNO PATH INSTRUCTIONS FOUND!!")
