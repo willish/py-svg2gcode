@@ -19,7 +19,7 @@ postamble = "G0 Z10\nM5\nM2"
 shape_preamble = ""#G4 P0.2"
 
 '''G-code emitted after processing a SVG shape'''
-shape_postamble = "M5"#"G4 P0.2\nM05"
+shape_postamble = "M3 S100"#"G4 P0.2\nM05"
 
 # A4 area:               210mm x 297mm
 # Printer Cutting Area: ~178mm x ~344mm

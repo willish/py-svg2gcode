@@ -149,7 +149,7 @@ def generate_gcode(filename):
 
                     if new_shape:
                         gcode += ("G0 X%0.1f Y%0.1f\n" % (x, y))
-                        gcode += "M3\n"
+                        gcode += "M3 S0\n"
                         new_shape = False
                     else:
                         gcode += ("G0 X%0.1f Y%0.1f\n" % (x, y))
